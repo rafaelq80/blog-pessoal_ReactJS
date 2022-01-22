@@ -1,11 +1,10 @@
 import React from 'react';
+import Home from './paginas/home/Home';
 import './App.css';
 
-let nome = 'Rafael';
 function App() {
   return (
-      //<h1>Hello World!</h1>
-      <h2>{nome}</h2>
+      <Home />
   );
 }
 
