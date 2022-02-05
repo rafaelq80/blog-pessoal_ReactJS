@@ -1,12 +1,28 @@
-import React, { useState, ChangeEvent} from 'react';
+import React, { useState, ChangeEvent, useEffect} from 'react';
 import { Grid, Box, Typography, TextField, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
 import UserLogin from '../../models/UserLogin';
+import useLocalStorage from 'react-use-localstorage';
+import { api } from '../../services/Service';
+
+// Instalar useLocalStorage -> yarn add react-use-localstorage@3.5.3
 
 function Login() {
 
+    /**
+     * Armazena o histórico de navegação
+     */
+    let history = useHistory();
 
+    /**
+     * Local Storage armazena o Token
+     */
+    const [token, setToken] = useLocalStorage('token');
+
+    /**
+     * Inicializa o Objeto UserLogin e atualiza o valor
+     */
     const [userLogin, setUserLogin] = useState<UserLogin>(
         {
             id: 0,
@@ -30,10 +46,30 @@ function Login() {
             })
         }
 
+        /**
+         * Redireciona para a Home se o Token estiver vazio,
+         * ou seja, não fez o login 
+         * 
+         */
+       useEffect(()=>{
+            if(token !== ''){
+                history.push('/home')
+            }
+        }, [token])
+        
         async function onSubmit(e: ChangeEvent<HTMLFormElement>){
             e.preventDefault(); //Previne o comportamento padrão do formulário (Atualizar a página)
 
             console.log('userLogin: ' + Object.values(userLogin)); //Imprime o objeto userLogin no Console
+
+            try{
+                const resposta = await api.post(`/usuarios/logar`, userLogin)
+                setToken(resposta.data.token)
+
+                alert('Usuário logado com sucesso!');
+            }catch(error){
+                alert('Dados do usuário inconsistentes. Erro ao logar!');
+            }
         }
        
     return (
