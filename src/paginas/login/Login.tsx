@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
 import UserLogin from '../../models/UserLogin';
 import useLocalStorage from 'react-use-localstorage';
-import { api } from '../../services/Service';
+import { login } from '../../services/Service';
 
 // Instalar useLocalStorage -> yarn add react-use-localstorage@3.5.3
 
@@ -60,11 +60,8 @@ function Login() {
         async function onSubmit(e: ChangeEvent<HTMLFormElement>){
             e.preventDefault(); //Previne o comportamento padrão do formulário (Atualizar a página)
 
-            console.log('userLogin: ' + Object.values(userLogin)); //Imprime o objeto userLogin no Console
-
             try{
-                const resposta = await api.post(`/usuarios/logar`, userLogin)
-                setToken(resposta.data.token)
+                await login(`/usuarios/logar`, userLogin, setToken); //Chama a função login e armazena o Token no Local Storage
 
                 alert('Usuário logado com sucesso!');
             }catch(error){
