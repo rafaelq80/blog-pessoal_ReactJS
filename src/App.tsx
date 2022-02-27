@@ -10,6 +10,10 @@ import ListaPostagem from './components/postagens/listapostagem/ListaPostagem';
 import ListaTema from './components/temas/listatema/ListaTema';
 import ListaPostagemTitulo from './components/postagens/listapostagemtitulo/ListaPostagemTitulo';
 import ListaTemaDescricao from './components/temas/listatemadescricao/ListaTemaDescricao';
+import CadastroPostagem from './components/postagens/cadastroPostagem/CadastroPostagem';
+import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
+import CadastroTema from './components/temas/cadastroTema/CadastroTema';
+import DeletarTema from './components/temas/deletarTema/DeletarTema';
 
 
 function App() {
@@ -50,6 +54,25 @@ function App() {
             <Route path='/descricao'>
               <ListaTemaDescricao />
             </Route>
+
+            <Route exact path='/formularioPostagem'>
+            <CadastroPostagem />
+          </Route>
+          <Route exact path='/formularioPostagem/:id'>
+            <CadastroPostagem />
+          </Route>
+          <Route exact path='/formularioTema'>
+            <CadastroTema />
+          </Route>
+          <Route exact path='/formularioTema/:id'>
+            <CadastroTema />
+          </Route>
+          <Route path='/deletarPostagem/:id'>
+            <DeletarPostagem />
+          </Route>
+          <Route path='/deletarTema/:id'>
+            <DeletarTema />
+          </Route>
 
           </div>
         </Switch>
