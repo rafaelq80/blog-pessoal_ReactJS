@@ -9,6 +9,7 @@ import './App.css';
 import ListaPostagem from './components/postagens/listapostagem/ListaPostagem';
 import ListaTema from './components/temas/listatema/ListaTema';
 import ListaPostagemTitulo from './components/postagens/listapostagemtitulo/ListaPostagemTitulo';
+import ListaTemaDescricao from './components/temas/listatemadescricao/ListaTemaDescricao';
 
 
 function App() {
@@ -45,7 +46,11 @@ function App() {
             <Route path='/titulo'>
               <ListaPostagemTitulo />
             </Route>
-            
+
+            <Route path='/descricao'>
+              <ListaTemaDescricao />
+            </Route>
+
           </div>
         </Switch>
       <Footer />

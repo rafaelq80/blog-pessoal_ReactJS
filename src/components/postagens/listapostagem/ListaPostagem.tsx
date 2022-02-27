@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Postagem from '../../../models/Postagem';
-import { busca } from '../../../services/Service'
+import { buscaTitulo } from '../../../services/Service'
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import './ListaPostagem.css';
 import useLocalStorage from 'react-use-localstorage';
@@ -21,7 +21,7 @@ function ListaPostagem() {
   }, [token])
 
   async function getPost() {
-    await busca("/postagens", setPosts, {
+    await buscaTitulo("/postagens", setPosts, {
       headers: {
         'Authorization': token
       }

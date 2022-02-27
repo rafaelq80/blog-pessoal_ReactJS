@@ -39,12 +39,26 @@ function Navbar() {
                                 </Typography>
                             </Box>
                         </Link>
+                        <Link to="/titulo" className="text-decorator-none">
+                            <Box mx={1} className='cursor'>
+                                <Typography variant="h6" color="inherit">
+                                    postagens por título
+                                </Typography>
+                            </Box>
+                        </Link>
                         <Link to="/temas" className="text-decorator-none">
                         <Box mx={1} className='cursor'>
                             <Typography variant="h6" color="inherit">
                                 temas
                             </Typography>
                         </Box>
+                        </Link>
+                        <Link to="/descricao" className="text-decorator-none">
+                            <Box mx={1} className='cursor'>
+                                <Typography variant="h6" color="inherit">
+                                    temas por descrição
+                                </Typography>
+                            </Box>
                         </Link>
                         <Link to="/formularioTema" className="text-decorator-none">
                         <Box mx={1} className='cursor'>
