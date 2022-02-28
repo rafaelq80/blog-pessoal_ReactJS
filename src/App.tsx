@@ -14,6 +14,7 @@ import CadastroPostagem from './components/postagens/cadastroPostagem/CadastroPo
 import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
 import CadastroTema from './components/temas/cadastroTema/CadastroTema';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
+import ListaUsuarios from './components/usuarios/listausuarios/ListaUsuarios';
 
 
 function App() {
@@ -73,6 +74,10 @@ function App() {
           <Route path='/deletarTema/:id'>
             <DeletarTema />
           </Route>
+
+          <Route path='/usuarios'>
+              <ListaUsuarios />
+            </Route>
 
           </div>
         </Switch>
