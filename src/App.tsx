@@ -15,6 +15,7 @@ import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPosta
 import CadastroTema from './components/temas/cadastroTema/CadastroTema';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
 import ListaUsuarios from './components/usuarios/listausuarios/ListaUsuarios';
+import AtualizarUsuario from './components/usuarios/atualizarUsuario/AtualizarUsuario';
 
 
 function App() {
@@ -77,7 +78,11 @@ function App() {
 
           <Route path='/usuarios'>
               <ListaUsuarios />
-            </Route>
+          </Route>
+
+          <Route exact path='/atualizausuario/:id'>
+            <AtualizarUsuario />
+          </Route>
 
           </div>
         </Switch>
