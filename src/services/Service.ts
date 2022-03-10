@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const api = axios.create({
     baseURL: 'https://bp2022.herokuapp.com'
+    //baseURL: 'http://localhost:8080'
 })
 
 /**
