@@ -16,14 +16,17 @@ import CadastroTema from './components/temas/cadastroTema/CadastroTema';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
 import ListaUsuarios from './components/usuarios/listausuarios/ListaUsuarios';
 import AtualizarUsuario from './components/usuarios/atualizarUsuario/AtualizarUsuario';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 
 function App() {
   return (
-    <Router>
-      <Navbar />
+    <Provider store={store}>
+      <Router>
+        <Navbar />
         <Switch>
-          <div style={{minHeight: '100vh'}}>
+          <div style={{ minHeight: '100vh' }}>
 
             <Route exact path='/'>
               <Login />
@@ -44,7 +47,7 @@ function App() {
             <Route path='/temas'>
               <ListaTema />
             </Route>
-            
+
             <Route path='/postagens'>
               <ListaPostagem />
             </Route>
@@ -58,36 +61,37 @@ function App() {
             </Route>
 
             <Route exact path='/formularioPostagem'>
-            <CadastroPostagem />
-          </Route>
-          <Route exact path='/formularioPostagem/:id'>
-            <CadastroPostagem />
-          </Route>
-          <Route exact path='/formularioTema'>
-            <CadastroTema />
-          </Route>
-          <Route exact path='/formularioTema/:id'>
-            <CadastroTema />
-          </Route>
-          <Route path='/deletarPostagem/:id'>
-            <DeletarPostagem />
-          </Route>
-          <Route path='/deletarTema/:id'>
-            <DeletarTema />
-          </Route>
+              <CadastroPostagem />
+            </Route>
+            <Route exact path='/formularioPostagem/:id'>
+              <CadastroPostagem />
+            </Route>
+            <Route exact path='/formularioTema'>
+              <CadastroTema />
+            </Route>
+            <Route exact path='/formularioTema/:id'>
+              <CadastroTema />
+            </Route>
+            <Route path='/deletarPostagem/:id'>
+              <DeletarPostagem />
+            </Route>
+            <Route path='/deletarTema/:id'>
+              <DeletarTema />
+            </Route>
 
-          <Route path='/usuarios'>
+            <Route path='/usuarios'>
               <ListaUsuarios />
-          </Route>
+            </Route>
 
-          <Route exact path='/atualizausuario/:id'>
-            <AtualizarUsuario />
-          </Route>
+            <Route exact path='/atualizausuario/:id'>
+              <AtualizarUsuario />
+            </Route>
 
           </div>
         </Switch>
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </Provider>
   );
 }
 

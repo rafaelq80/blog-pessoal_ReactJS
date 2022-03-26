@@ -5,12 +5,19 @@ import './AtualizarUsuario.css';
 import useLocalStorage from 'react-use-localstorage';
 import { buscaId, put } from '../../../services/Service';
 import Usuario from '../../../models/Usuario';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 
 function AtualizarUsuario() {
     let history = useHistory();
     const { id } = useParams<{id: string}>();
-    const [token, setToken] = useLocalStorage('token');
+    //const [token, setToken] = useLocalStorage('token');
+    
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+      );
+      
     const [usuario, setUsuario] = useState<Usuario>({
         id: 0,
         nome: '',

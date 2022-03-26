@@ -6,12 +6,18 @@ import useLocalStorage from 'react-use-localstorage';
 import { useHistory } from 'react-router-dom';
 import { busca } from '../../../services/Service';
 import Usuario from '../../../models/Usuario';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function ListaUsuarios() {
     const [usuarios, setUsuarios] = useState<Usuario[]>([])
-    const [token, setToken] = useLocalStorage('token');
+    //const [token, setToken] = useLocalStorage('token');
     let history = useHistory();
 
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+      );
+    
     useEffect(() => {
         if (token === '') {
             alert("Você precisa estar logado")

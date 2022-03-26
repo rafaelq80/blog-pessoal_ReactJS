@@ -5,6 +5,8 @@ import './Login.css';
 import UserLogin from '../../models/UserLogin';
 import useLocalStorage from 'react-use-localstorage';
 import { login } from '../../services/Service';
+import { addToken } from '../../store/tokens/actions';
+import { useDispatch } from 'react-redux';
 
 // Instalar useLocalStorage -> yarn add react-use-localstorage@3.5.3
 
@@ -15,11 +17,13 @@ function Login() {
      */
     let history = useHistory();
 
+    const dispatch = useDispatch()
     /**
      * Local Storage armazena o Token
      */
-    const [token, setToken] = useLocalStorage('token');
+    //const [token, setToken] = useLocalStorage('token');
 
+    const [token, setToken] = useState('');
     /**
      * Inicializa o Objeto UserLogin e atualiza o valor
      */
@@ -53,6 +57,7 @@ function Login() {
          */
        useEffect(()=>{
             if(token !== ''){
+                dispatch(addToken(token));
                 history.push('/home')
             }
         }, [token])
