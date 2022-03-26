@@ -8,6 +8,7 @@ import { busca } from '../../../services/Service';
 import Usuario from '../../../models/Usuario';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function ListaUsuarios() {
     const [usuarios, setUsuarios] = useState<Usuario[]>([])
@@ -16,11 +17,21 @@ function ListaUsuarios() {
 
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
-      );
-    
+    );
+
     useEffect(() => {
         if (token === '') {
-            alert("Você precisa estar logado")
+            //alert("Você precisa estar logado")
+            toast.error('Você precisa estar logado', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });
             history.push("/login")
         }
     }, [token])
@@ -37,7 +48,7 @@ function ListaUsuarios() {
     useEffect(() => {
         getUsuario()
     }, [usuarios.length])
-    
+
     return (
         <>
             {

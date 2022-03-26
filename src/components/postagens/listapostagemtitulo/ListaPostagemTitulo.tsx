@@ -7,6 +7,7 @@ import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function ListaPostagemTitulo() {
 
@@ -21,7 +22,17 @@ function ListaPostagemTitulo() {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado")
+      //alert("Você precisa estar logado")
+      toast.error('Você precisa estar logado', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+      });
       history.push("/login")
 
     }
@@ -59,62 +70,62 @@ function ListaPostagemTitulo() {
     <>
       <form action="" onSubmit={onSubmit}>
         <Box display="flex" justifyContent="center" marginTop={2} marginBottom={2} width="100%">
-        <TextField
-          label="Título"
-          id="titulo"
-          value={titulo}
-          variant="outlined"
-          className="input"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => updateTitulo(e)}
-        />
-        <Button variant="contained"  className="button"  type="submit" color="primary">
-          Pesquisar
-        </Button>
+          <TextField
+            label="Título"
+            id="titulo"
+            value={titulo}
+            variant="outlined"
+            className="input"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => updateTitulo(e)}
+          />
+          <Button variant="contained" className="button" type="submit" color="primary">
+            Pesquisar
+          </Button>
         </Box>
       </form>
 
       {
         posts.map(post => (
           <Box m={2} >
-              <Card variant="outlined">
-                <CardContent>
-                  <Typography color="textSecondary" gutterBottom>
-                    Postagens
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                    {post.titulo}
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    {post.texto}
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    {post.tema?.descricao}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Box display="flex" justifyContent="center" mb={1.5}>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography color="textSecondary" gutterBottom>
+                  Postagens
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  {post.titulo}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {post.texto}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  {post.tema?.descricao}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Box display="flex" justifyContent="center" mb={1.5}>
 
-                    <Link to={`/formularioPostagem/${post.id}`} className="text-decorator-none" >
-                      <Box mx={1}>
-                        <Button variant="contained" className="marginLeft" size='small' color="primary" >
-                          atualizar
-                        </Button>
-                      </Box>
-                    </Link>
-                    <Link to={`/deletarPostagem/${post.id}`} className="text-decorator-none">
-                      <Box mx={1}>
-                        <Button variant="contained" size='small' color="secondary">
-                          deletar
-                        </Button>
-                      </Box>
-                    </Link>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Box>
+                  <Link to={`/formularioPostagem/${post.id}`} className="text-decorator-none" >
+                    <Box mx={1}>
+                      <Button variant="contained" className="marginLeft" size='small' color="primary" >
+                        atualizar
+                      </Button>
+                    </Box>
+                  </Link>
+                  <Link to={`/deletarPostagem/${post.id}`} className="text-decorator-none">
+                    <Box mx={1}>
+                      <Button variant="contained" size='small' color="secondary">
+                        deletar
+                      </Button>
+                    </Box>
+                  </Link>
+                </Box>
+              </CardActions>
+            </Card>
+          </Box>
         ))
-       }
-  </>
+      }
+    </>
   );
 }
 

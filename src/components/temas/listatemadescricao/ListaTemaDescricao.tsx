@@ -7,6 +7,7 @@ import { busca } from '../../../services/Service';
 import Tema from '../../../models/Tema';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function ListaPostagemDescricao() {
 
@@ -21,7 +22,17 @@ function ListaPostagemDescricao() {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado")
+      //alert("Você precisa estar logado")
+      toast.error('Você precisa estar logado', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+      });
       history.push("/login")
 
     }
@@ -32,7 +43,9 @@ function ListaPostagemDescricao() {
       headers: {
         'Authorization': token
       }
+      
     })
+  
   }
 
 
@@ -47,7 +60,7 @@ function ListaPostagemDescricao() {
     setDescricao(
       e.target.value
     )
-
+     
   }
 
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
@@ -59,56 +72,56 @@ function ListaPostagemDescricao() {
     <>
       <form action="" onSubmit={onSubmit}>
         <Box display="flex" justifyContent="center" marginTop={2} marginBottom={2} width="100%">
-        <TextField
-          label="Descrição"
-          id="descricao"
-          value={descricao}
-          variant="outlined"
-          className="input"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => updateDescricao(e)}
-        />
-        <Button variant="contained"  className="button"  type="submit" color="primary">
-          Pesquisar
-        </Button>
+          <TextField
+            label="Descrição"
+            id="descricao"
+            value={descricao}
+            variant="outlined"
+            className="input"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => updateDescricao(e)}
+          />
+          <Button variant="contained" className="button" type="submit" color="primary">
+            Pesquisar
+          </Button>
         </Box>
       </form>
 
       {
-      temas.map(tema =>(
-      <Box m={2} >
-        <Card variant="outlined">
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Tema
-            </Typography>
-            <Typography variant="h5" component="h2">
-             {tema.descricao}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Box display="flex" justifyContent="center" mb={1.5} >
+        temas.map(tema => (
+          <Box m={2} >
+            <Card variant="outlined">
+              <CardContent>
+                <Typography color="textSecondary" gutterBottom>
+                  Tema
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  {tema.descricao}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Box display="flex" justifyContent="center" mb={1.5} >
 
-              <Link to={`/formularioTema/${tema.id}`} className="text-decorator-none">
-                <Box mx={1}>
-                  <Button variant="contained" className="marginLeft" size='small' color="primary" >
-                    atualizar
-                  </Button>
+                  <Link to={`/formularioTema/${tema.id}`} className="text-decorator-none">
+                    <Box mx={1}>
+                      <Button variant="contained" className="marginLeft" size='small' color="primary" >
+                        atualizar
+                      </Button>
+                    </Box>
+                  </Link>
+                  <Link to={`/deletarTema/${tema.id}`} className="text-decorator-none">
+                    <Box mx={1}>
+                      <Button variant="contained" size='small' color="secondary">
+                        deletar
+                      </Button>
+                    </Box>
+                  </Link>
                 </Box>
-              </Link>
-              <Link to={`/deletarTema/${tema.id}`} className="text-decorator-none">
-                <Box mx={1}>
-                  <Button variant="contained" size='small' color="secondary">
-                    deletar
-                  </Button>
-                </Box>
-              </Link>
-            </Box>
-          </CardActions>
-        </Card>
-      </Box>
-      ))
+              </CardActions>
+            </Card>
+          </Box>
+        ))
       }
-  </>
+    </>
   );
 }
 
