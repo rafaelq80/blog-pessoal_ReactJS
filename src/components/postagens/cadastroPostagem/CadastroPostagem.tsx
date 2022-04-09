@@ -1,14 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@material-ui/core"
-import './CadastroPostagem.css';
-import { useHistory, useParams } from 'react-router-dom';
-import Tema from '../../../models/Tema';
-import useLocalStorage from 'react-use-localstorage';
-import Postagem from '../../../models/Postagem';
-import { busca, buscaId, post, put } from '../../../services/Service';
+import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from "@material-ui/core";
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Postagem from '../../../models/Postagem';
+import Tema from '../../../models/Tema';
+import { busca, buscaId, post, put } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import './CadastroPostagem.css';
 
 function CadastroPostagem() {
     let history = useHistory();

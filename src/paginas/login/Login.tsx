@@ -1,13 +1,12 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
-import { Grid, Box, Typography, TextField, Button } from '@material-ui/core';
+import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import './Login.css';
+import { toast } from 'react-toastify';
 import UserLogin from '../../models/UserLogin';
-import useLocalStorage from 'react-use-localstorage';
 import { login } from '../../services/Service';
 import { addToken } from '../../store/tokens/actions';
-import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+import './Login.css';
 
 // Instalar useLocalStorage -> yarn add react-use-localstorage@3.5.3
 

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Typography, Box, Grid, Button } from '@material-ui/core';
-import './Home.css';
-import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';
-import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
+import { Box, Button, Grid, Typography } from '@material-ui/core';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
+import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';
 import { TokenState } from '../../store/tokens/tokensReducer';
+import './Home.css';
 
 function Home() {
 

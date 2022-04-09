@@ -1,14 +1,11 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Box } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom'
-import useLocalStorage from 'react-use-localstorage';
+import { AppBar, Box, Toolbar, Typography } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 
-import './Navbar.css'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { addToken } from '../../../store/tokens/actions';
 import { TokenState } from '../../../store/tokens/tokensReducer';
-import {toast} from 'react-toastify';
+import './Navbar.css';
 
 function Navbar() {
     //const [token, setToken] = useLocalStorage('token');

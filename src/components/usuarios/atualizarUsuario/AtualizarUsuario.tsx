@@ -1,13 +1,12 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
-import { Container, Typography, TextField, Button } from "@material-ui/core"
-import { Link, useHistory, useParams } from 'react-router-dom'
-import './AtualizarUsuario.css';
-import useLocalStorage from 'react-use-localstorage';
-import { buscaId, put } from '../../../services/Service';
-import Usuario from '../../../models/Usuario';
+import { Button, Container, TextField, Typography } from "@material-ui/core";
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Usuario from '../../../models/Usuario';
+import { buscaId, put } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import './AtualizarUsuario.css';
 
 function AtualizarUsuario() {
     let history = useHistory();

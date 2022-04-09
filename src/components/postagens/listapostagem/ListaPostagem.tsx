@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Postagem from '../../../models/Postagem';
-import { buscaTitulo } from '../../../services/Service'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import './ListaPostagem.css';
-import useLocalStorage from 'react-use-localstorage';
-import { useHistory } from 'react-router-dom'
+import { Box, Button, Card, CardActions, CardContent, Typography } from '@material-ui/core';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Postagem from '../../../models/Postagem';
+import { buscaTitulo } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import './ListaPostagem.css';
 
 function ListaPostagem() {
   const [posts, setPosts] = useState<Postagem[]>([])

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import Tema from '../../../models/Tema';
-import './ListaTema.css';
-import useLocalStorage from 'react-use-localstorage';
-import { useHistory } from 'react-router-dom';
-import { busca } from '../../../services/Service';
+import { Box, Button, Card, CardActions, CardContent, Typography } from '@material-ui/core';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Tema from '../../../models/Tema';
+import { busca } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import './ListaTema.css';
 
 function ListaTema() {
   const [temas, setTemas] = useState<Tema[]>([])
