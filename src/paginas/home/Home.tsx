@@ -20,7 +20,7 @@ function Home() {
             history.push("/login")
 
         }
-    }, [token])
+    }, [token, history])
 
     return (
         <>

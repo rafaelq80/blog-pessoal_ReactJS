@@ -35,7 +35,7 @@ function ListaPostagemTitulo() {
       history.push("/login")
 
     }
-  }, [token])
+  }, [token, history])
 
   async function getPost() {
     await busca(`/postagens/titulo/${titulo}`, setPosts, {
@@ -50,7 +50,7 @@ function ListaPostagemTitulo() {
 
     getPost()
 
-  }, [posts.length])
+  }, [posts.length, getPost])
 
   function updateTitulo(e: ChangeEvent<HTMLInputElement>) {
 

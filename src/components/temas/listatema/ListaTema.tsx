@@ -32,7 +32,7 @@ function ListaTema() {
       });
       history.push("/login")
     }
-  }, [token])
+  }, [token, history])
 
 
   async function getTema() {
@@ -46,7 +46,7 @@ function ListaTema() {
 
   useEffect(() => {
     getTema()
-  }, [temas.length])
+  }, [temas.length, getTema])
 
   return (
     <>

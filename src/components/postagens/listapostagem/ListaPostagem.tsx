@@ -33,7 +33,7 @@ function ListaPostagem() {
       history.push("/login")
 
     }
-  }, [token])
+  }, [token, history])
 
   async function getPost() {
     await buscaTitulo("/postagens", setPosts, {
@@ -47,7 +47,7 @@ function ListaPostagem() {
 
     getPost()
 
-  }, [posts.length])
+  }, [posts.length, getPost])
 
   return (
     <>
