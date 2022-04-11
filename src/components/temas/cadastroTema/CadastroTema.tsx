@@ -1,13 +1,12 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
-import { Container, Typography, TextField, Button } from "@material-ui/core"
-import { useHistory, useParams } from 'react-router-dom'
-import './CadastroTema.css';
-import useLocalStorage from 'react-use-localstorage';
+import { Button, Container, TextField, Typography } from "@material-ui/core";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Tema from '../../../models/Tema';
 import { buscaId, post, put } from '../../../services/Service';
-import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
-import { toast } from 'react-toastify';
+import './CadastroTema.css';
 
 function CadastroTema() {
     let history = useHistory();

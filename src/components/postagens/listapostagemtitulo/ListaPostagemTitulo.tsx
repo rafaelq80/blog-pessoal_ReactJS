@@ -1,13 +1,12 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { Box, Card, CardActions, CardContent, Button, Typography, TextField, Grid } from '@material-ui/core';
-import './ListaPostagemTitulo.css';
-import useLocalStorage from 'react-use-localstorage';
+import { Box, Button, Card, CardActions, CardContent, TextField, Typography } from '@material-ui/core';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
-import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
-import { toast } from 'react-toastify';
+import './ListaPostagemTitulo.css';
 
 function ListaPostagemTitulo() {
 
