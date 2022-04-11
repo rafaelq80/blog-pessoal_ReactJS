@@ -35,7 +35,7 @@ function ListaPostagemDescricao() {
       history.push("/login")
 
     }
-  }, [token])
+  }, [token, history])
 
   async function getTema() {
     await busca(`/temas/descricao/${descricao}`, setTemas, {
@@ -52,7 +52,7 @@ function ListaPostagemDescricao() {
 
     getTema()
 
-  }, [temas.length])
+  }, [temas.length, getTema])
 
   function updateDescricao(e: ChangeEvent<HTMLInputElement>) {
 

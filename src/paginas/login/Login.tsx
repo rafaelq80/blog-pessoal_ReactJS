@@ -60,7 +60,7 @@ function Login() {
             dispatch(addToken(token));
             history.push('/home')
         }
-    }, [token])
+    }, [token, history, dispatch])
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault(); //Previne o comportamento padrão do formulário (Atualizar a página)

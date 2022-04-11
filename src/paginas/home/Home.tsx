@@ -15,12 +15,12 @@ function Home() {
     );
 
     useEffect(() => {
-        if (token == "") {
+        if (token === "") {
             alert("Você precisa estar logado")
             history.push("/login")
 
         }
-    }, [token])
+    }, [token, history])
 
     return (
         <>

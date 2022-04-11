@@ -51,7 +51,7 @@ function CadastroUsuario() {
             history.push("/login")
             console.log(userResult)
         }
-    }, [userResult])
+    }, [userResult, history])
 
     /**
      * 

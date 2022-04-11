@@ -21,7 +21,7 @@ function DeletarTema() {
   const [tema, setTema] = useState<Tema>()
 
   useEffect(() => {
-    if (token == "") {
+    if (token === "") {
       //alert("Você precisa estar logado")
       toast.error('Você precisa estar logado', {
         position: "top-right",
@@ -36,13 +36,13 @@ function DeletarTema() {
       history.push("/login")
 
     }
-  }, [token])
+  }, [token, history])
 
   useEffect(() => {
     if (id !== undefined) {
       findById(id)
     }
-  }, [id])
+  }, [id, findById])
 
   async function findById(id: string) {
     buscaId(`/temas/${id}`, setTema, {

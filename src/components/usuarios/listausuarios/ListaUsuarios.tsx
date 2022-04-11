@@ -32,7 +32,7 @@ function ListaUsuarios() {
             });
             history.push("/login")
         }
-    }, [token])
+    }, [token, history])
 
 
     async function getUsuario() {
@@ -45,7 +45,7 @@ function ListaUsuarios() {
 
     useEffect(() => {
         getUsuario()
-    }, [usuarios.length])
+    }, [usuarios.length, getUsuario])
 
     return (
         <>

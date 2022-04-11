@@ -35,7 +35,7 @@ function CadastroPostagem() {
             history.push("/login")
 
         }
-    }, [token])
+    }, [token, history])
 
     const [tema, setTema] = useState<Tema>({
         id: 0,
@@ -54,14 +54,14 @@ function CadastroPostagem() {
             ...postagem,
             tema: tema
         })
-    }, [tema])
+    }, [tema, postagem])
 
     useEffect(() => {
         getTemas()
         if (id !== undefined) {
             findByIdPostagem(id)
         }
-    }, [id])
+    }, [id, getTemas, findByIdPostagem])
 
     async function getTemas() {
         await busca("/temas", setTemas, {
