@@ -43,13 +43,13 @@ function AtualizarUsuario() {
             history.push("/login")
 
         }
-    }, [token, history])
+    }, [token])
 
     useEffect(() => {
         if (id !== undefined) {
             findById(id)
         }
-    }, [id, findById])
+    }, [id])
 
     async function findById(id: string) {
         buscaId(`/usuarios/${id}`, setUsuario, {
