@@ -12,7 +12,7 @@ function CadastroTema() {
     let history = useHistory();
     const { id } = useParams<{ id: string }>();
     //const [token, setToken] = useLocalStorage('token');
-
+    
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
     );
@@ -38,13 +38,13 @@ function CadastroTema() {
             history.push("/login")
 
         }
-    }, [token, history])
+    }, [token])
 
     useEffect(() => {
         if (id !== undefined) {
             findById(id)
         }
-    }, [id, findById])
+    }, [id])
 
     async function findById(id: string) {
         buscaId(`/temas/${id}`, setTema, {

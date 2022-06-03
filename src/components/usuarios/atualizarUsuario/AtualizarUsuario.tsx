@@ -78,7 +78,7 @@ function AtualizarUsuario() {
         e.preventDefault()
         console.log("usuário " + JSON.stringify(usuario))
 
-        if (confirmarSenha === usuario.senha) {
+        if (confirmarSenha === usuario.senha && usuario.senha.length >= 8) {
             if (id !== undefined) {
                 console.log(usuario)
                 put(`/usuarios/atualizar`, usuario, setUsuario, {
