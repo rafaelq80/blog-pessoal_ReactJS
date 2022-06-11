@@ -77,9 +77,7 @@ function ListaPostagemTitulo() {
             className="input"
             onChange={(e: ChangeEvent<HTMLInputElement>) => updateTitulo(e)}
           />
-          <Button variant="contained" className="button" type="submit" color="primary">
-            Pesquisar
-          </Button>
+         
         </Box>
       </form>
 

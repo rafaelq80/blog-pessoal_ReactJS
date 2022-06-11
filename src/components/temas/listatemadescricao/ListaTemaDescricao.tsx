@@ -79,9 +79,7 @@ function ListaPostagemDescricao() {
             className="input"
             onChange={(e: ChangeEvent<HTMLInputElement>) => updateDescricao(e)}
           />
-          <Button variant="contained" className="button" type="submit" color="primary">
-            Pesquisar
-          </Button>
+     
         </Box>
       </form>
 
