@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import UserLogin from '../../models/UserLogin';
 import { login } from '../../services/Service';
-import { addToken } from '../../store/tokens/actions';
+import { addId, addToken } from '../../store/user/actions';
 import './Login.css';
 
 // Instalar useLocalStorage -> yarn add react-use-localstorage@3.5.3
@@ -38,6 +38,16 @@ function Login() {
         }
     )
 
+    // Crie mais um State para pegar os dados retornados a API
+    const [respUserLogin, setRespUserLogin] = useState<UserLogin>({
+        id: 0,
+        nome:'',
+        usuario: '',
+        senha: '',
+        token: '',
+        foto: ""
+    })
+
     /**
      * 
      * @param e -> Captura os valores do input e insere na função setUserLogin
@@ -56,17 +66,24 @@ function Login() {
      * 
      */
     useEffect(() => {
-        if (token !== '') {
-            dispatch(addToken(token));
+        if (respUserLogin.token !== '') {
+
+            // Verifica os dados pelo console (Opcional)
+            console.log("Token: " + respUserLogin.token)
+            console.log("ID: " + respUserLogin.id)
+
+            // Guarda as informações dentro do Redux (Store)
+            dispatch(addToken(respUserLogin.token))
+            dispatch(addId(respUserLogin.id.toString()))
             history.push('/home')
         }
-    }, [token, history, dispatch])
+    }, [respUserLogin.token, history, dispatch])
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault(); //Previne o comportamento padrão do formulário (Atualizar a página)
 
         try {
-            await login(`/usuarios/logar`, userLogin, setToken); //Chama a função login e armazena o Token no Local Storage
+            await login(`/usuarios/logar`, userLogin, setRespUserLogin); //Chama a função login e armazena o Token no Local Storage
 
             //alert('Usuário logado com sucesso!');
 

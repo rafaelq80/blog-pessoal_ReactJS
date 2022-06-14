@@ -4,15 +4,15 @@ import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
 import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';
-import { TokenState } from '../../store/tokens/tokensReducer';
+import { UserState } from '../../store/user/userReducer';
 import './Home.css';
 
 function Home() {
 
     let history = useHistory();
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
-    );
+    )
 
     useEffect(() => {
         if (token === "") {

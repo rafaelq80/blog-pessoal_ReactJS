@@ -3,16 +3,20 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { addToken } from '../../../store/tokens/actions';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { addToken } from '../../../store/user/actions';
+import { UserState } from '../../../store/user/userReducer';
 import './Navbar.css';
 
 function Navbar() {
     //const [token, setToken] = useLocalStorage('token');
 
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
     );
+
+    const id = useSelector<UserState, UserState["id"]>(
+        (state) => state.id
+    )
 
     let history = useHistory();
 
@@ -20,7 +24,10 @@ function Navbar() {
 
     function goLogout() {
         //setToken('')
-        dispatch(addToken(''));
+        
+        dispatch(addToken(''))
+        dispatch(addId(''))
+
         //alert("Usuário deslogado")
         toast.info('Usuário deslogado', {
             position: "top-right",
@@ -116,3 +123,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
+function addId(arg0: string): any {
+    throw new Error('Function not implemented.');
+}

@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Tema from '../../../models/Tema';
 import { busca } from '../../../services/Service';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import './ListaTema.css';
 
 function ListaTema() {
@@ -13,9 +13,9 @@ function ListaTema() {
   //const [token, setToken] = useLocalStorage('token');
   let history = useHistory();
 
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
-  );
+)
 
   useEffect(() => {
     if (token === '') {

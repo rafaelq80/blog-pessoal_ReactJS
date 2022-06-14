@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import { buscaId, deleteId } from '../../../services/Service';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import './DeletarPostagem.css';
 
 function DeletarPostagem() {
@@ -13,9 +13,9 @@ function DeletarPostagem() {
   const { id } = useParams<{ id: string }>();
   //const [token, setToken] = useLocalStorage('token');
 
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
-  );
+)
 
   const [post, setPosts] = useState<Postagem>()
 

@@ -5,7 +5,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Usuario from '../../../models/Usuario';
 import { buscaId, put } from '../../../services/Service';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import './AtualizarUsuario.css';
 
 function AtualizarUsuario() {
@@ -13,9 +13,9 @@ function AtualizarUsuario() {
     const { id } = useParams<{ id: string }>();
     //const [token, setToken] = useLocalStorage('token');
 
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
-    );
+    )
 
     const [usuario, setUsuario] = useState<Usuario>({
         id: 0,

@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import { buscaTitulo } from '../../../services/Service';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import './ListaPostagem.css';
 
 function ListaPostagem() {
@@ -13,9 +13,9 @@ function ListaPostagem() {
   //const [token, setToken] = useLocalStorage('token');
   let history = useHistory();
 
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
-  );
+  )
 
   useEffect(() => {
     if (token === "") {
@@ -68,6 +68,12 @@ function ListaPostagem() {
                 <Typography variant="body2" component="p">
                   {post.tema?.descricao}
                 </Typography>
+
+                {/* Add esse campo para mostrar o nome do User que criou a Postagem  */}
+                <Typography variant="body2" component="p">
+                  {post.usuario?.nome}
+                </Typography>
+
               </CardContent>
               <CardActions>
                 <Box display="flex" justifyContent="center" mb={1.5}>

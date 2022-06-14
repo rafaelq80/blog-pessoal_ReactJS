@@ -5,19 +5,50 @@ import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import Tema from '../../../models/Tema';
+import Usuario from "../../../models/Usuario";
 import { busca, buscaId, post, put } from '../../../services/Service';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import './CadastroPostagem.css';
 
 function CadastroPostagem() {
+    
     let history = useHistory();
-    const { id } = useParams<{ id: string }>();
+
+    const { id } = useParams<{ id: string }>()
+
     const [temas, setTemas] = useState<Tema[]>([])
+
     //const [token, setToken] = useLocalStorage('token');
 
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
+    )
+
+    // Pega o ID guardado no Store
+    const userId = useSelector<UserState, UserState["id"]>(
+        (state) => state.id
     );
+
+    const [tema, setTema] = useState<Tema>({
+        id: 0,
+        descricao: ''
+    })
+
+    const [postagem, setPostagem] = useState<Postagem>({
+        id: 0,
+        titulo: '',
+        texto: '',
+        tema: null,
+        usuario: null
+    })
+
+    const [user, setUser] = useState<Usuario>({
+        id: +userId,    // Faz uma conversão de String para Number
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: ''
+    })
 
     useEffect(() => {
         if (token === "") {
@@ -37,18 +68,6 @@ function CadastroPostagem() {
         }
     }, [token])
 
-    const [tema, setTema] = useState<Tema>({
-        id: 0,
-        descricao: ''
-    })
-
-    const [postagem, setPostagem] = useState<Postagem>({
-        id: 0,
-        titulo: '',
-        texto: '',
-        tema: null
-    })
-
     useEffect(() => {
         setPostagem({
             ...postagem,
@@ -58,7 +77,7 @@ function CadastroPostagem() {
 
     useEffect(() => {
         getTemas()
-        if (id !== undefined) {
+        if (id !== '') {
             findByIdPostagem(id)
         }
     }, [id])
@@ -84,7 +103,8 @@ function CadastroPostagem() {
         setPostagem({
             ...postagem,
             [e.target.name]: e.target.value,
-            tema: tema
+            tema: tema,
+            usuario: user
         })
 
     }
@@ -92,6 +112,8 @@ function CadastroPostagem() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
 
+        console.log(postagem)
+        
         if (id !== undefined) {
             put(`/postagens`, postagem, setPostagem, {
                 headers: {

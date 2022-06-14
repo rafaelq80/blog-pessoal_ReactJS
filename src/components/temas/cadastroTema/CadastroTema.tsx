@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Tema from '../../../models/Tema';
 import { buscaId, post, put } from '../../../services/Service';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import './CadastroTema.css';
 
 function CadastroTema() {
@@ -13,9 +13,9 @@ function CadastroTema() {
     const { id } = useParams<{ id: string }>();
     //const [token, setToken] = useLocalStorage('token');
     
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
-    );
+    )
 
     const [tema, setTema] = useState<Tema>({
         id: 0,
