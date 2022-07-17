@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 export const api = axios.create({
-    baseURL: 'https://bp2022v2.herokuapp.com'
+    baseURL: 'https://bpnest2022.herokuapp.com'
+    //baseURL: 'https://bp2022.herokuapp.com'
     //baseURL: 'http://localhost:8080'
 })
 

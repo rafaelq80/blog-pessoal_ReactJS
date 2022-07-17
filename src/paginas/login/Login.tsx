@@ -83,7 +83,7 @@ function Login() {
         e.preventDefault(); //Previne o comportamento padrão do formulário (Atualizar a página)
 
         try {
-            await login(`/usuarios/logar`, userLogin, setRespUserLogin); //Chama a função login e armazena o Token no Local Storage
+            await login(`/auth/logar`, userLogin, setRespUserLogin); //Chama a função login e armazena o Token no Local Storage
 
             //alert('Usuário logado com sucesso!');
 
