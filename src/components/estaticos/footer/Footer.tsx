@@ -1,17 +1,16 @@
-import React from 'react';
-import InstagramIcon from '@material-ui/icons/Instagram';
+import { Box, Grid, Typography } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import { Typography, Box, Grid } from '@material-ui/core';
-import './Footer.css';
 import { useSelector } from 'react-redux';
-import { UserState } from '../../../store/user/userReducer';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import './Footer.css';
 
 function Footer() {
 
-    const token = useSelector<UserState, UserState["tokens"]>(
+    const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
-    )
+      );
 
     var footerComponent;
 

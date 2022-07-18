@@ -1,21 +1,21 @@
 import { Button, Container, TextField, Typography } from "@material-ui/core";
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Usuario from '../../../models/Usuario';
 import { buscaId, put } from '../../../services/Service';
-import { UserState } from '../../../store/user/userReducer';
+import { TokenState } from "../../../store/tokens/tokensReducer";
 import './AtualizarUsuario.css';
 
 function AtualizarUsuario() {
-    let history = useHistory();
+    
     const { id } = useParams<{ id: string }>();
-    //const [token, setToken] = useLocalStorage('token');
 
-    const token = useSelector<UserState, UserState["tokens"]>(
-        (state) => state.tokens
-    )
+    let navigate = useNavigate();
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  );
 
     const [usuario, setUsuario] = useState<Usuario>({
         id: 0,
@@ -29,7 +29,6 @@ function AtualizarUsuario() {
 
     useEffect(() => {
         if (token === "") {
-            //alert("Você precisa estar logado")
             toast.error('Você precisa estar logado', {
                 position: "top-right",
                 autoClose: 2000,
@@ -40,7 +39,7 @@ function AtualizarUsuario() {
                 theme: "colored",
                 progress: undefined,
             });
-            history.push("/login")
+            navigate("/login")
 
         }
     }, [token])
@@ -84,7 +83,6 @@ function AtualizarUsuario() {
                         'Authorization': token
                     }
                 })
-                //alert('Usuário atualizado com sucesso!');
                 toast.success('Usuario atualizado com sucesso', {
                     position: "top-right",
                     autoClose: 2000,
@@ -97,7 +95,6 @@ function AtualizarUsuario() {
                 });
             }
         } else {
-            //alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
             toast.error('Dados inconsistentes. Favor verificar as informações de cadastro.', {
                 position: "top-right",
                 autoClose: 2000,
@@ -115,9 +112,8 @@ function AtualizarUsuario() {
     }
 
     function back() {
-        history.push('/usuarios')
+        navigate('/usuarios')
     }
-
 
     return (
         <Container maxWidth="sm" className="topo">

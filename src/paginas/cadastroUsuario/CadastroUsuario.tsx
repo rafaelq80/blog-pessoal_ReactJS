@@ -1,6 +1,6 @@
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import User from '../../models/Usuario';
 import { cadastroUsuario } from '../../services/Service';
@@ -12,7 +12,7 @@ function CadastroUsuario() {
     /**
      * Armazena o histórico de navegação
      */
-    let history = useHistory();
+     let navigate = useNavigate();
 
     /**
      * Checa se o confirmar senha é igual a senha
@@ -48,10 +48,10 @@ function CadastroUsuario() {
      */
     useEffect(() => {
         if (userResult.id !== 0) {
-            history.push("/login")
+            navigate("/login")
             console.log(userResult)
         }
-    }, [userResult, history])
+    }, [userResult])
 
     /**
      * 
@@ -78,7 +78,6 @@ function CadastroUsuario() {
 
             try {
                 await cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-                //alert('Usuario cadastrado com sucesso')
                 toast.success('Usuario cadastrado com sucesso', {
                     position: "top-right",
                     autoClose: 2000,
@@ -105,7 +104,6 @@ function CadastroUsuario() {
 
             }
         } else {
-            //alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
             toast.error('Dados inconsistentes. Favor verificar as informações de cadastro.', {
                 position: "top-right",
                 autoClose: 2000,

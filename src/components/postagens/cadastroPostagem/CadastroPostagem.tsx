@@ -1,31 +1,46 @@
 import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from "@material-ui/core";
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import Tema from '../../../models/Tema';
 import Usuario from "../../../models/Usuario";
 import { busca, buscaId, post, put } from '../../../services/Service';
-import { UserState } from '../../../store/user/userReducer';
+import { TokenState } from "../../../store/tokens/tokensReducer";
 import './CadastroPostagem.css';
 
 function CadastroPostagem() {
     
-    let history = useHistory();
+    let navigate = useNavigate();
 
-    const { id } = useParams<{ id: string }>()
+    const { id } = useParams<{ id: string }>();
 
     const [temas, setTemas] = useState<Tema[]>([])
 
-    //const [token, setToken] = useLocalStorage('token');
-
-    const token = useSelector<UserState, UserState["tokens"]>(
+    const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
     )
 
+    useEffect(() => {
+        if (token === "") {
+            toast.error('Você precisa estar logado', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });
+            navigate("/login")
+
+        }
+    }, [token])
+
     // Pega o ID guardado no Store
-    const userId = useSelector<UserState, UserState["id"]>(
+    const userId = useSelector<TokenState, TokenState["id"]>(
         (state) => state.id
     );
 
@@ -42,31 +57,13 @@ function CadastroPostagem() {
         usuario: null
     })
 
-    const [user, setUser] = useState<Usuario>({
+   const [user, setUser] = useState<Usuario>({
         id: +userId,    // Faz uma conversão de String para Number
         nome: '',
         usuario: '',
         senha: '',
         foto: ''
     })
-
-    useEffect(() => {
-        if (token === "") {
-            //alert("Você precisa estar logado")
-            toast.error('Você precisa estar logado', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                theme: "colored",
-                progress: undefined,
-            });
-            history.push("/login")
-
-        }
-    }, [token])
 
     useEffect(() => {
         setPostagem({
@@ -77,7 +74,7 @@ function CadastroPostagem() {
 
     useEffect(() => {
         getTemas()
-        if (id !== '') {
+        if (id !== undefined) {
             findByIdPostagem(id)
         }
     }, [id])
@@ -104,7 +101,7 @@ function CadastroPostagem() {
             ...postagem,
             [e.target.name]: e.target.value,
             tema: tema,
-            usuario: user
+            usuario: null
         })
 
     }
@@ -120,7 +117,7 @@ function CadastroPostagem() {
                     'Authorization': token
                 }
             })
-            //alert('Postagem atualizada com sucesso');
+
             toast.success('Postagem atualizada com sucesso', {
                 position: "top-right",
                 autoClose: 2000,
@@ -137,7 +134,7 @@ function CadastroPostagem() {
                     'Authorization': token
                 }
             })
-            //alert('Postagem cadastrada com sucesso');
+
             toast.success('Postagem cadastrada com sucesso', {
                 position: "top-right",
                 autoClose: 2000,
@@ -154,7 +151,7 @@ function CadastroPostagem() {
     }
 
     function back() {
-        history.push('/postagens')
+        navigate('/postagens')
     }
 
     return (

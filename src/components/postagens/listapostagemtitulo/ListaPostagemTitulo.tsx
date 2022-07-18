@@ -1,27 +1,25 @@
 import { Box, Button, Card, CardActions, CardContent, TextField, Typography } from '@material-ui/core';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
-import { UserState } from '../../../store/user/userReducer';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 import './ListaPostagemTitulo.css';
 
 function ListaPostagemTitulo() {
 
   const [posts, setPosts] = useState<Postagem[]>([])
-  //const [token, setToken] = useLocalStorage('token');
-  let history = useHistory();
   const [titulo, setTitulo] = useState<string>("")
 
-  const token = useSelector<UserState, UserState["tokens"]>(
+  let navigate = useNavigate();
+  const token = useSelector<TokenState, TokenState["tokens"]>(
     (state) => state.tokens
-  )
+  );
 
   useEffect(() => {
     if (token === "") {
-      //alert("Você precisa estar logado")
       toast.error('Você precisa estar logado', {
         position: "top-right",
         autoClose: 2000,
@@ -32,10 +30,10 @@ function ListaPostagemTitulo() {
         theme: "colored",
         progress: undefined,
       });
-      history.push("/login")
+      navigate("/login")
 
     }
-  }, [token, history])
+  }, [token])
 
   async function getPost() {
     await busca(`/postagens/titulo/${titulo}`, setPosts, {
@@ -44,7 +42,6 @@ function ListaPostagemTitulo() {
       }
     })
   }
-
 
   useEffect(() => {
 

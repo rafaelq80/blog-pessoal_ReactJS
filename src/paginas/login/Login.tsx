@@ -1,57 +1,25 @@
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import UserLogin from '../../models/UserLogin';
 import { login } from '../../services/Service';
-import { addId, addToken } from '../../store/user/actions';
+import { addToken } from "../../store/tokens/actions";
 import './Login.css';
-
-// Instalar useLocalStorage -> yarn add react-use-localstorage@3.5.3
 
 function Login() {
 
-    /**
-     * Armazena o histórico de navegação
-     */
-    let history = useHistory();
-
-    const dispatch = useDispatch()
-    /**
-     * Local Storage armazena o Token
-     */
-    //const [token, setToken] = useLocalStorage('token');
-
+    let navigate = useNavigate();
+    const dispatch = useDispatch();
     const [token, setToken] = useState('');
-    /**
-     * Inicializa o Objeto UserLogin e atualiza o valor
-     */
-    const [userLogin, setUserLogin] = useState<UserLogin>(
-        {
+    const [userLogin, setUserLogin] = useState<UserLogin>({
             id: 0,
-            nome: '',
             usuario: '',
             senha: '',
-            foto: '',
             token: ''
-        }
-    )
-
-    // Crie mais um State para pegar os dados retornados a API
-    const [respUserLogin, setRespUserLogin] = useState<UserLogin>({
-        id: 0,
-        nome:'',
-        usuario: '',
-        senha: '',
-        token: '',
-        foto: ""
-    })
-
-    /**
-     * 
-     * @param e -> Captura os valores do input e insere na função setUserLogin
-     */
+        })
+  
     function updatedModel(e: ChangeEvent<HTMLInputElement>) {
 
         setUserLogin({
@@ -60,32 +28,18 @@ function Login() {
         })
     }
 
-    /**
-     * Redireciona para a Home se o Token estiver vazio,
-     * ou seja, não fez o login 
-     * 
-     */
-    useEffect(() => {
-        if (respUserLogin.token !== '') {
-
-            // Verifica os dados pelo console (Opcional)
-            console.log("Token: " + respUserLogin.token)
-            console.log("ID: " + respUserLogin.id)
-
-            // Guarda as informações dentro do Redux (Store)
-            dispatch(addToken(respUserLogin.token))
-            dispatch(addId(respUserLogin.id.toString()))
-            history.push('/home')
+    useEffect(()=>{
+        if(token != ''){
+            dispatch(addToken(token));
+            navigate('/home')
         }
-    }, [respUserLogin.token, history, dispatch])
+    }, [token])
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault(); //Previne o comportamento padrão do formulário (Atualizar a página)
 
         try {
-            await login(`/auth/logar`, userLogin, setRespUserLogin); //Chama a função login e armazena o Token no Local Storage
-
-            //alert('Usuário logado com sucesso!');
+            await login(`/usuarios/logar`, userLogin, setToken);
 
             toast.success('Usuário logado com sucesso!', {
                 position: "top-right",
@@ -99,7 +53,6 @@ function Login() {
             });
 
         } catch (error) {
-            //alert('Dados do usuário inconsistentes. Erro ao logar!');
 
             toast.error('Dados do usuário inconsistentes. Erro ao logar!', {
                 position: "top-right",

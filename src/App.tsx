@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/estaticos/navbar/Navbar';
 import Footer from './components/estaticos/footer/Footer';
 import Home from './paginas/home/Home';
@@ -18,7 +18,7 @@ import ListaUsuarios from './components/usuarios/listausuarios/ListaUsuarios';
 import AtualizarUsuario from './components/usuarios/atualizarUsuario/AtualizarUsuario';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -28,70 +28,34 @@ function App() {
       <ToastContainer />
       <Router>
         <Navbar />
-        <Switch>
-          <div style={{ minHeight: '100vh' }}>
 
-            <Route exact path='/'>
-              <Login />
-            </Route>
+        <div style={{ minHeight: '100vh' }}>
 
-            <Route path='/login'>
-              <Login />
-            </Route>
+          <Routes>
 
-            <Route path='/home'>
-              <Home />
-            </Route>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/cadastrousuario" element={<CadastroUsuario />} />
+            <Route path="/temas" element={<ListaTema />} />
+            <Route path="/postagens" element={<ListaPostagem />} />
+            <Route path="/titulo" element={<ListaPostagemTitulo />} />
+            <Route path="/descricao" element={<ListaTemaDescricao />} />
+            <Route path="/deletarPostagem/:id" element={<DeletarPostagem />} />
+            <Route path="/formularioPostagem" element={<CadastroPostagem />} />
+            <Route path="/formularioPostagem/:id" element={<CadastroPostagem />} />
+            <Route path="/deletarTema/:id" element={<DeletarTema />} />
+            <Route path="/formularioTema" element={<CadastroTema />} />
+            <Route path="/formularioTema/:id" element={<CadastroTema />} />
+            <Route path="/usuarios" element={<ListaUsuarios />} />
+            <Route path="/atualizausuario/:id" element={<AtualizarUsuario />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home />} />
 
-            <Route path='/cadastrousuario'>
-              <CadastroUsuario />
-            </Route>
+          </Routes>
 
-            <Route path='/temas'>
-              <ListaTema />
-            </Route>
+        </div>
 
-            <Route path='/postagens'>
-              <ListaPostagem />
-            </Route>
-
-            <Route path='/titulo'>
-              <ListaPostagemTitulo />
-            </Route>
-
-            <Route path='/descricao'>
-              <ListaTemaDescricao />
-            </Route>
-
-            <Route exact path='/formularioPostagem'>
-              <CadastroPostagem />
-            </Route>
-            <Route exact path='/formularioPostagem/:id'>
-              <CadastroPostagem />
-            </Route>
-            <Route exact path='/formularioTema'>
-              <CadastroTema />
-            </Route>
-            <Route exact path='/formularioTema/:id'>
-              <CadastroTema />
-            </Route>
-            <Route path='/deletarPostagem/:id'>
-              <DeletarPostagem />
-            </Route>
-            <Route path='/deletarTema/:id'>
-              <DeletarTema />
-            </Route>
-
-            <Route path='/usuarios'>
-              <ListaUsuarios />
-            </Route>
-
-            <Route exact path='/atualizausuario/:id'>
-              <AtualizarUsuario />
-            </Route>
-
-          </div>
-        </Switch>
         <Footer />
       </Router>
     </Provider>

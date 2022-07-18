@@ -1,27 +1,25 @@
 import { Box, Button, Card, CardActions, CardContent, Typography } from "@material-ui/core";
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Postagem from '../../../models/Postagem';
 import { buscaId, deleteId } from '../../../services/Service';
-import { UserState } from '../../../store/user/userReducer';
+import { TokenState } from "../../../store/tokens/tokensReducer";
 import './DeletarPostagem.css';
 
 function DeletarPostagem() {
-  let history = useHistory();
+  let navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  //const [token, setToken] = useLocalStorage('token');
-
-  const token = useSelector<UserState, UserState["tokens"]>(
+  
+  const token = useSelector<TokenState, TokenState["tokens"]>(
     (state) => state.tokens
-)
+  );
 
   const [post, setPosts] = useState<Postagem>()
 
   useEffect(() => {
     if (token === "") {
-      //alert("Você precisa estar logado")
       toast.error('Você precisa estar logado', {
         position: "top-right",
         autoClose: 2000,
@@ -32,16 +30,16 @@ function DeletarPostagem() {
         theme: "colored",
         progress: undefined,
       });
-      history.push("/login")
+      navigate("/login")
 
     }
-  }, [token, history])
+  }, [token])
 
   useEffect(() => {
     if (id !== undefined) {
       findById(id)
     }
-  }, [id, findById])
+  }, [id])
 
   async function findById(id: string) {
     buscaId(`/postagens/${id}`, setPosts, {
@@ -52,13 +50,12 @@ function DeletarPostagem() {
   }
 
   function sim() {
-    history.push('/postagens')
+    navigate('/postagens')
     deleteId(`/postagens/${id}`, {
       headers: {
         'Authorization': token
       }
     });
-    //alert('Postagem deletada com sucesso');
     toast.success('Postagem deletada com sucesso', {
       position: "top-right",
       autoClose: 2000,
@@ -72,7 +69,7 @@ function DeletarPostagem() {
   }
 
   function nao() {
-    history.push('/postagens')
+    navigate('/postagens')
   }
   return (
     <>
